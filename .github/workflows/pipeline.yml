@@ -10,3 +10,6 @@ jobs:
     steps:
       - name: print Hello World
         run: echo "Hello World!"
+        
+      - name: print Secret
+        run: echo $MY_SECRET
