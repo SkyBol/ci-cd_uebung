@@ -68,3 +68,5 @@ jobs:
         run: chmod +x gradlew
       - name: Test with Gradle
         run: ./gradlew test
+      - name: check sonarqube
+        run: ./gradlew sonarqube --info -Dsonar.projectKey=uk223  -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }} -Dsonar.login=${{ secrets.SONAR_TOKEN }}
