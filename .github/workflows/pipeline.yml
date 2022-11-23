@@ -12,4 +12,9 @@ jobs:
         run: echo "Hello World!"
 
       - name: print Secret
-        run: echo ${{secrets.MY_SECRET}} 
+        run: echo ${{secrets.MY_SECRET}}
+
+      - name: run sh
+        run: chmod +x ./run.sh
+         ./run.sh
+        shell: bash
