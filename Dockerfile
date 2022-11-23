@@ -1,20 +1,12 @@
-# docker build -t ukfrontend .
+# docker build -t ukbackend .
 
-FROM node:16-alpine as build
-WORKDIR /app
-COPY . .
-RUN yarn install --network-timeout 600000
-RUN yarn run build
+FROM gradle:jdk18 AS build
+COPY --chown=gradle:gradle . /home/gradle/src
+WORKDIR /home/gradle/src
+RUN gradle --no-daemon bootJar
 
-FROM nginx:alpine
-EXPOSE 443 80
-
-WORKDIR /usr/share/nginx/html
-#COPY --from=build /app/nginx.conf /etc/nginx/conf.d/default.conf
-COPY --from=build /app/build .
-#COPY --from=build /app/.env.production .
-
-RUN apk add --no-cache bash
-
-
-CMD ["/bin/bash", "-c", "nginx -g \"daemon off;\""]
+FROM openjdk:18
+RUN mkdir /app
+COPY --from=build /home/gradle/src/build/libs/*.jar /app/spring-boot-application.jar
+EXPOSE 8080
+CMD ["java","-jar", "-Xmx4g", "/app/spring-boot-application.jar"]

@@ -1,16 +1,18 @@
-version: '3.7'
+version: "3.8"
 
 services:
-  frontend:
-    mem_limit: 128m
-    cpus: 0.1
-
-    restart: unless-stopped
-    image: asuzas/uekfrontend:1.0.3
-    container_name: frontend_sky
-    env_file: .env
-    depends_on:
-      - backend
+  db:
+    image: postgres
+    container_name: db
     ports:
-      - 8094:80
-  
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: postgres
+  backend:
+    depends_on:
+      - db
+    image: javatest:0.0.3
+    container_name: backend
+    env_file: .env
+    ports:
+      - 8080:8080
