@@ -12,4 +12,4 @@ jobs:
         run: echo "Hello World!"
 
       - name: print Secret
-        run: echo $MY_SECRET  
+        run: echo $MY_SECRET
