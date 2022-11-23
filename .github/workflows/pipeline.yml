@@ -14,6 +14,9 @@ jobs:
       - name: print Secret
         run: echo ${{secrets.MY_SECRET}}
 
+
+      - uses: actions/checkout@v2
+
       - name: run sh
         run: chmod +x ./run.sh
          ./run.sh
