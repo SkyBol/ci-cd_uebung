@@ -17,7 +17,10 @@ jobs:
 
       - uses: actions/checkout@v2
 
-      - name: run sh
+      - name: set executable sh
         run: chmod +x ./run.sh
-         ./run.sh
+        shell: bash
+
+      - name: run sh
+        run: ./run.sh
         shell: bash
