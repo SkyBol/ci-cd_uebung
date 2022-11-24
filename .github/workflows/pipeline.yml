@@ -54,7 +54,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/docker-backend:${{ GITHUB_SHA }}
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/docker-backend:${{ github.sha }}
 
   test-backend-postman:
     name: Backend Postman Tests
