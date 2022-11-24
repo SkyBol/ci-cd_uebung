@@ -20,7 +20,7 @@ jobs:
       - name: Test with Gradle
         run: ./gradlew test
   test_backend_sonarqube:
-    name: Backend Gradle Tests
+    name: Backend Sonarqube Tests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
