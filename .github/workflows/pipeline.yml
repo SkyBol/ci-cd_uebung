@@ -54,6 +54,8 @@ jobs:
         run: chmod +x gradlew
       - name: Start backend
         run: ./gradlew bootRun
+        env:
+          DB_HOST: postgres
       - uses: matt-ball/newman-action@master
         with:
           collection: ./postman/cd.postman_collection.json
