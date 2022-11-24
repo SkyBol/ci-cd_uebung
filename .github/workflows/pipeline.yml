@@ -3,6 +3,10 @@ name: CICD
 on: 
   push
 
+# This is needed later for using Variables in places where you cannot
+env:
+  GITHUB_SHA: ${{github.sha}}
+
 jobs:
   test-backend-gradleTests:
     name: Backend Gradle Tests
