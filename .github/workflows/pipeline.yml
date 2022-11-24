@@ -64,9 +64,13 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: start postgres
-        run: docker run --name postgres -e POSTGRES_PASSWORD=postgres -p 5432:5432 -d postgres 
+        run: docker run --name postgres -e POSTGRES_PASSWORD=postgres -p 5432:5432 -d postgres
+      - name: wait for startup of postgres
+        run: docker wait postgres
       - name: start backend 
         run: docker run --name backend -e DB_HOST=localhost -p 8080:8080 -d ${{ secrets.DOCKER_HUB_USERNAME }}/docker-backend:${{ github.sha }} 
+      - name: wait for startup of backend
+        run: docker wait backend
       - uses: matt-ball/newman-action@master
         with:
           collection: ./postman/cd.postman_collection.json
@@ -99,4 +103,5 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           port: 22
-          script: docker-compose up -d  
+          script: docker-compose up -d
+
