@@ -55,7 +55,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/docker-backend:${{ env.${{ github.sha }} }}
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/docker-backend:${{ github.sha }}
 
   test-backend-postman:
     name: Backend Postman Tests
@@ -66,7 +66,7 @@ jobs:
       - name: start postgres
         run: docker run --name postgres -e POSTGRES_PASSWORD=postgres -p 5432:5432 -d postgres 
       - name: start backend 
-        run: docker run --name backend -e DB_HOST=localhost -p 8080:8080 -d ${{ secrets.DOCKER_HUB_USERNAME }}/docker-backend:${{ env.${{ github.sha }} }} 
+        run: docker run --name backend -e DB_HOST=localhost -p 8080:8080 -d ${{ secrets.DOCKER_HUB_USERNAME }}/docker-backend:${{ github.sha }} 
       - uses: matt-ball/newman-action@master
         with:
           collection: ./postman/cd.postman_collection.json
@@ -83,7 +83,7 @@ jobs:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
       - name: Rename Docker image
-        run: docker image tag ${{ secrets.DOCKER_HUB_USERNAME }}/docker-backend:${{ ${{ github.sha }} }}s ${{ secrets.DOCKER_HUB_USERNAME }}/docker-backend:latest
+        run: docker image tag ${{ secrets.DOCKER_HUB_USERNAME }}/docker-backend:${{ github.sha  }} ${{ secrets.DOCKER_HUB_USERNAME }}/docker-backend:latest
 
   restart-server-docker:
     name: Restart the docker compose running on the server
