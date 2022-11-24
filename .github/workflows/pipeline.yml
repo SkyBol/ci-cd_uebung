@@ -58,7 +58,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/docker-backend:${{ GITHUB_SHA }}
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/docker-backend:${{ env.GITHUB_SHA }}
 
   test-backend-postman:
     name: Backend Postman Tests
@@ -70,7 +70,7 @@ jobs:
         env:
           POSTGRES_PASSWORD: postgres
       backend:
-        image: ${{ secrets.DOCKER_HUB_USERNAME }}/docker-backend:${{ GITHUB_SHA }}
+        image: ${{ secrets.DOCKER_HUB_USERNAME }}/docker-backend:${{ env.GITHUB_SHA }}
         env:
           DB_HOST: localhost
         ports:
