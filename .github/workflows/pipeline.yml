@@ -54,7 +54,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/docker-backend:${{ github.sha }}
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/docker-backend:${{ GITHUB_SHA }}
 
   test-backend-postman:
     name: Backend Postman Tests
@@ -66,7 +66,7 @@ jobs:
         env:
           POSTGRES_PASSWORD: postgres
       backend:
-        image: $(${{ secrets.DOCKER_HUB_USERNAME }})/docker-backend:${{ github.sha }}
+        image: ${{ secrets.DOCKER_HUB_USERNAME }}/docker-backend:${{ GITHUB_SHA }}
         env:
           DB_HOST: localhost
         ports:
@@ -90,7 +90,7 @@ jobs:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
       - name: Rename Docker image
-        run: docker image tag ${{ secrets.DOCKER_HUB_USERNAME }}/docker-backend:${{ github.sha }}s ${{ secrets.DOCKER_HUB_USERNAME }}/docker-backend:latest
+        run: docker image tag ${{ secrets.DOCKER_HUB_USERNAME }}/docker-backend:${{ GITHUB_SHA }}s ${{ secrets.DOCKER_HUB_USERNAME }}/docker-backend:latest
 
   restart-server-docker:
     name: Restart the docker compose running on the server
