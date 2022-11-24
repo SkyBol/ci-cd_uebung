@@ -65,12 +65,10 @@ jobs:
       - uses: actions/checkout@v2
       - name: start postgres
         run: docker run --name postgres -e POSTGRES_PASSWORD=postgres -p 5432:5432 -d postgres
-      - name: wait for startup of postgres
-        run: until nc -w 10 127.0.0.1 5432; do sleep 1; done
       - name: start backend 
         run: docker run --name backend -e DB_HOST=localhost -p 8080:8080 -d ${{ secrets.DOCKER_HUB_USERNAME }}/docker-backend:${{ github.sha }} 
-      - name: wait for startup of backend
-        run: until nc -w 10 127.0.0.1 8080; do sleep 1; done
+      - name: wait 10 s
+        run: sleep 10
       - uses: matt-ball/newman-action@master
         with:
           collection: ./postman/cd.postman_collection.json
