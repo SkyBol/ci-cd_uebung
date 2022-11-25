@@ -1,0 +1,39 @@
+version: '3.7'
+
+services:
+  frontend:
+    mem_limit: 128m
+    cpus: 0.1
+
+    restart: unless-stopped
+    image: asuzas/uekfrontend:1.0.3
+    container_name: frontend_sky
+    env_file: .env
+    depends_on:
+      - backend
+    ports:
+      - 8009:80
+  backend:
+    mem_limit: 512M
+    cpus: 0.3
+
+    restart: unless-stopped
+    image: asuzas/docker-backend:latest
+    container_name: backend_sky
+    ports:
+      - 8094:8080
+    environment:
+      - DB_HOST=db
+    depends_on:
+      - db
+  db:
+    mem_limit: 128m
+    cpus: 0.05
+
+    restart: unless-stopped
+    image: 'postgres:10-alpine'
+    container_name: db_sky
+    environment:
+      POSTGRES_PASSWORD: 'postgres'
+      POSTGRES_USER: 'postgres'
+      POSTGRES_DB: 'postgres'
