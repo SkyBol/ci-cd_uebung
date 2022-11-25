@@ -27,8 +27,6 @@ jobs:
         run: chmod +x gradlew
       - name: Test with Gradle
         run: ./gradlew test
-      - name: Test with Postman
-        run: ./gradlew bootRun --args='postmanTest'
   test-backend-sonarqube:
     name: Backend Sonarqube Tests
     runs-on: ubuntu-latest
