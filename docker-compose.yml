@@ -1,18 +1,60 @@
-version: "3.8"
+version: '3.7'
 
 services:
-  db:
-    image: postgres
-    container_name: db
+  frontend:
+    mem_limit: 128m
+    cpus: 0.1
+
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80"]
+      interval: 1m
+      timeout: 2s
+      retries: 5
+      start_period: 1m
+
+    restart: unless-stopped
+    image: asuzas/uekfrontend:1.0.3
+    container_name: frontend_sky
+    env_file: .env
+    depends_on:
+      - backend
     ports:
-      - 5432:5432
-    environment:
-      POSTGRES_PASSWORD: postgres
+      - 8009:80
   backend:
+    mem_limit: 512M
+    cpus: 0.3
+
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080"]
+      interval: 1m
+      timeout: 2s
+      retries: 5
+      start_period: 1m
+
+    restart: unless-stopped
+    image: asuzas/docker-backend:latest
+    container_name: backend_sky
+    ports:
+      - 8094:8080
+    environment:
+      - DB_HOST=db
     depends_on:
       - db
-    image: javatest:0.0.3
-    container_name: backend
-    env_file: .env
-    ports:
-      - 8080:8080
+  db:
+    mem_limit: 128m
+    cpus: 0.05
+
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5432"]
+      interval: 20s
+      timeout: 2s
+      retries: 5
+      start_period: 20s
+
+    restart: unless-stopped
+    image: 'postgres:10-alpine'
+    container_name: db_sky
+    environment:
+      POSTGRES_PASSWORD: 'postgres'
+      POSTGRES_USER: 'postgres'
+      POSTGRES_DB: 'postgres'

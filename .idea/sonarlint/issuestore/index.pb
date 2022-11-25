@@ -73,16 +73,12 @@ s
 Csrc/main/java/com/example/demo/core/security/WebSecurityConfig.java,d\8\d8a24fc9f4a929ad8f3eeb1ca5e732b44cc5e755
 v
 Fsrc/main/java/com/example/demo/domain/blogpost/BlogPostRepository.java,4\e\4e15e0b0a2fd3f07c26f8c871fd185f89f56b86f
-?
-settings.gradle,0\5\05efc8b1657769a27696d478ded1e95f38737233
 B
 docker-compose.yml,3\5\35b8c13cf2eb2a194eada000eb310d65aed53b2a
 v
 Fsrc/main/java/com/example/demo/domain/blogpost/BlogPostController.java,f\1\f1905b8c9239e22393c13d5553788a1f48478185
 l
 <src/main/java/com/example/demo/domain/blogpost/BlogPost.java,f\9\f98a7ab82e4e75eeae8b95ab7e9e34a0b12e51c7
-c
-3src/main/java/com/example/demo/DemoApplication.java,7\1\7171df7c024808a26040ea210fc78aec82a83023
 t
 Dsrc/main/java/com/example/demo/core/generic/ExtendedServiceImpl.java,a\c\acc20025dade6896a9abf9053e275741cc4e2203
 7
@@ -95,5 +91,5 @@ X
 (gradle/wrapper/gradle-wrapper.properties,f\b\fbe448ebfc3eb2d4e308f6b8b043666f5b57235e
 4
 .env,3\c\3c84dcdc6bbe3d7817c49dcdc327b926fea1808a
-<
-build.gradle,f\0\f07866736216be0ee2aba49e392191aeae700a35
+?
+settings.gradle,0\5\05efc8b1657769a27696d478ded1e95f38737233
