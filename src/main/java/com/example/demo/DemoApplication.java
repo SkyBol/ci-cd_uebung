@@ -1,15 +1,17 @@
 package com.example.demo;
 
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ConfigurableApplicationContext;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 @SpringBootApplication
 class DemoApplication {
   public static void main(String[] args) {
-    System.out.println(args);
+    System.out.println(args.length + " aaaaaaaa");
+    Arrays.stream(args).forEach(arg -> {
+      System.out.println(arg);
+    });
 
     //ConfigurableApplicationContext context = SpringApplication.run(DemoApplication.class, args);
 
