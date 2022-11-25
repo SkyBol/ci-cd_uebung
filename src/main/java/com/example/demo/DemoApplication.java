@@ -4,7 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
-import java.io.IOException;
+import java.io.*;
 
 @SpringBootApplication
 class DemoApplication {
@@ -34,6 +34,27 @@ class DemoApplication {
     final Process process = Runtime.getRuntime().exec(command);
 
     process.waitFor();
+
+    String line;
+
+    BufferedReader error = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+    while((line = error.readLine()) != null){
+      System.out.println(line);
+    }
+    error.close();
+
+    BufferedReader input = new BufferedReader(new InputStreamReader(process.getInputStream()));
+    while((line=input.readLine()) != null){
+      System.out.println(line);
+    }
+    input.close();
+
+
+    OutputStream outputStream = process.getOutputStream();
+    PrintStream printStream = new PrintStream(outputStream);
+    printStream.println();
+    printStream.flush();
+    printStream.close();
 
     return process.exitValue();
   }
