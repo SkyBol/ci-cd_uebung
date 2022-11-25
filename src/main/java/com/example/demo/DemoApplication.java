@@ -8,7 +8,7 @@ import java.io.IOException;
 
 @SpringBootApplication
 class DemoApplication {
-  public static void main(String[] args) throws Exception {
+  public static void main(String[] args) {
     ConfigurableApplicationContext context = SpringApplication.run(DemoApplication.class, args);
 
     if (args.length >= 1 && "postman".equals(args[0])) {
@@ -19,11 +19,11 @@ class DemoApplication {
           throw new Exception("Could not install newman");
         }
         if(0 != executeCommand("node ./node_modules/newman/bin/newman.js run ./src/test/resources/cd.postman_collection.json -e ./src/test/resources/cd.postman_environment.json")) {
-          throw new Exception("Could not run newman");
+          throw new Exception("Errors during Postman Tests");
         }
       } catch (Exception e) {
         e.printStackTrace();
-        throw e;
+        System.exit(1);
       }
 
       SpringApplication.exit(context);
