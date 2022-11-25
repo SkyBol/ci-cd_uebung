@@ -14,17 +14,27 @@ class DemoApplication {
     if (args.length >= 1) {
       System.out.println("PostmanTests");
 
+      int result;
       try {
-        ProcessBuilder pb = new ProcessBuilder("echo 'aaaaaaaaaaaaaaaaaaaaaaaa'");
-        pb.redirectOutput(ProcessBuilder.Redirect.INHERIT);
-        pb.redirectError(ProcessBuilder.Redirect.INHERIT);
-        Process p = pb.start();
-
-      } catch (IOException e) {
+        if(0 != executeCommand("npm i newman")) {
+          throw new Exception("Could not install newman");
+        }
+        if(0 != executeCommand("node ./node_modules/newman/bin/newman.js run ./src/test/resources/cd.postman_collection.json -e ./src/test/resources/cd.postman_environment.json")) {
+          throw new Exception("Could not run newman");
+        }
+      } catch (Exception e) {
         e.printStackTrace();
       }
 
       SpringApplication.exit(context);
     }
+  }
+
+  public static int executeCommand(String command) throws IOException, InterruptedException {
+    final Process process = Runtime.getRuntime().exec(command);
+
+    process.waitFor();
+
+    return process.exitValue();
   }
 }
