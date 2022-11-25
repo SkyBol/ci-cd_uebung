@@ -8,6 +8,13 @@ jobs:
   test-backend-gradleTests:
     name: Backend Gradle Tests
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_PASSWORD: postgres
+        ports: 
+          - 5432:5432
     steps:
       - uses: actions/checkout@v2
       - name: Set up JDK 18
