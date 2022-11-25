@@ -61,7 +61,7 @@ jobs:
 
   build-and-push-latest-version:
     name: Build and Push latest version
-    needs: test-backend-postman
+    needs: build-and-push-tagged-version
     runs-on: ubuntu-latest
     steps:
       - name: Login to Docker Hub
