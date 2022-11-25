@@ -11,7 +11,7 @@ class DemoApplication {
   public static void main(String[] args) throws Exception {
     ConfigurableApplicationContext context = SpringApplication.run(DemoApplication.class, args);
 
-    if (args.length >= 1) {
+    if (args.length >= 1 && "".equals(args[0])) {
       System.out.println("PostmanTests");
 
       try {
