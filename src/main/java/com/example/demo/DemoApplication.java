@@ -8,13 +8,12 @@ import java.io.IOException;
 
 @SpringBootApplication
 class DemoApplication {
-  public static void main(String[] args) {
+  public static void main(String[] args) throws Exception {
     ConfigurableApplicationContext context = SpringApplication.run(DemoApplication.class, args);
 
     if (args.length >= 1) {
       System.out.println("PostmanTests");
 
-      int result;
       try {
         if(0 != executeCommand("npm i newman")) {
           throw new Exception("Could not install newman");
@@ -24,6 +23,7 @@ class DemoApplication {
         }
       } catch (Exception e) {
         e.printStackTrace();
+        throw e;
       }
 
       SpringApplication.exit(context);
