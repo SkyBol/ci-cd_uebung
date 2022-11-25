@@ -156,7 +156,7 @@ jobs:
         # Install NPM dependencies, cache them correctly
         # and run all Cypress tests
       - name: Setup npm package
-        run: npm install --force
+        run: npm install
       - name: Cypress run
         uses: cypress-io/github-action@v4 # TODO use the explicit version number
         with:
