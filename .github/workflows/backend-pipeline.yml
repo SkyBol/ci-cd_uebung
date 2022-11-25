@@ -77,7 +77,7 @@ jobs:
       - name: Test with Postman
         run: ./gradlew bootRun --args='postman'
 
-  build-and-push:
+  build-and-push-backend:
     name: build tagged docker version
     runs-on: ubuntu-latest
     needs: [test-backend-gradleTests, test-backend-sonarqube, test-backend-postman]
@@ -103,7 +103,7 @@ jobs:
   restart-server-docker:
     name: Restart server docker compose
     runs-on: ubuntu-latest
-    needs: build-and-push
+    needs: build-and-push-backend
     defaults:
       run:  
         shell: bash
@@ -147,8 +147,30 @@ jobs:
         # Install NPM dependencies, cache them correctly
         # and run all Cypress tests
       - name: Cypress run
-        uses: cypress-io/github-action@v4.x.x # use the explicit version number
+        uses: cypress-io/github-action@v4 # TODO use the explicit version number
         with:
           build: npm run build
           start: npm start
   
+  build-and-push-frontend:
+    name: build tagged docker version
+    runs-on: ubuntu-latest
+    needs: [test-frontend-cypress]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      - name: build and push docker image
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: 
+            ${{ secrets.DOCKER_HUB_USERNAME }}/docker-backend:${{ github.sha }},
+            ${{ secrets.DOCKER_HUB_USERNAME }}/docker-backend:latest
