@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "3934e857-fb7d-47b7-8f68-ef3cc1708783",
+		"_postman_id": "b1147e12-e1d5-4b60-b62e-a0dfab060d79",
 		"name": "uk223_BlogPost",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "19980906"
+		"_exporter_id": "20316801"
 	},
 	"item": [
 		{
@@ -17,7 +17,7 @@
 							"script": {
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {\r",
-									"    pm.response.to.have.status(400);\r",
+									"    pm.response.to.have.status(200);\r",
 									"});\r",
 									"\r",
 									"pm.test(\"Blog Post Count equals 0\", function () {\r",
