@@ -1,6 +1,8 @@
 package com.example.demo;
 
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -8,14 +10,9 @@ import java.util.Arrays;
 @SpringBootApplication
 class DemoApplication {
   public static void main(String[] args) {
-    System.out.println(args.length + " aaaaaaaa");
-    Arrays.stream(args).forEach(arg -> {
-      System.out.println(arg);
-    });
+    ConfigurableApplicationContext context = SpringApplication.run(DemoApplication.class, args);
 
-    //ConfigurableApplicationContext context = SpringApplication.run(DemoApplication.class, args);
-
-    if (args.length > 1) {
+    if (args.length >= 1) {
       System.out.println("PostmanTests");
 
       try {
@@ -31,7 +28,7 @@ class DemoApplication {
 
       System.out.println("bbbbbbbbbbbaaaaaaaaaaaaaaaaaaaaaaaaah");
 
-      //SpringApplication.exit(context);
+      SpringApplication.exit(context);
     }
   }
 }
