@@ -16,12 +16,16 @@ class DemoApplication {
 
       try {
 
+        System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+
         Runtime rt = Runtime.getRuntime();
         Process pr = rt.exec("echo starttest");
 
       } catch (IOException e) {
         e.printStackTrace();
       }
+
+      System.out.println("bbbbbbbbbbbaaaaaaaaaaaaaaaaaaaaaaaaah");
 
       SpringApplication.exit(context);
     }
