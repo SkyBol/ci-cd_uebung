@@ -5,7 +5,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
 import java.io.IOException;
-import java.util.Arrays;
 
 @SpringBootApplication
 class DemoApplication {
@@ -16,17 +15,14 @@ class DemoApplication {
       System.out.println("PostmanTests");
 
       try {
-
-        System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-
-        Runtime rt = Runtime.getRuntime();
-        Process pr = rt.exec("echo starttest");
+        ProcessBuilder pb = new ProcessBuilder("echo 'aaaaaaaaaaaaaaaaaaaaaaaa'");
+        pb.redirectOutput(ProcessBuilder.Redirect.INHERIT);
+        pb.redirectError(ProcessBuilder.Redirect.INHERIT);
+        Process p = pb.start();
 
       } catch (IOException e) {
         e.printStackTrace();
       }
-
-      System.out.println("bbbbbbbbbbbaaaaaaaaaaaaaaaaaaaaaaaaah");
 
       SpringApplication.exit(context);
     }
