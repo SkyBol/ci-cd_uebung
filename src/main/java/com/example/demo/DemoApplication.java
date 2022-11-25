@@ -9,7 +9,9 @@ import java.io.IOException;
 @SpringBootApplication
 class DemoApplication {
   public static void main(String[] args) {
-    ConfigurableApplicationContext context = SpringApplication.run(DemoApplication.class, args);
+    System.out.println(args);
+
+    //ConfigurableApplicationContext context = SpringApplication.run(DemoApplication.class, args);
 
     if (args.length > 1) {
       System.out.println("PostmanTests");
@@ -27,7 +29,7 @@ class DemoApplication {
 
       System.out.println("bbbbbbbbbbbaaaaaaaaaaaaaaaaaaaaaaaaah");
 
-      SpringApplication.exit(context);
+      //SpringApplication.exit(context);
     }
   }
 }
