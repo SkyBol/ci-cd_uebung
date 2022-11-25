@@ -112,7 +112,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           port: 22
-          script:
+          script: |
             docker pull asuzas/docker-backend
             docker-compose up -d
 
